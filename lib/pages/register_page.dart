@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
           .doc(userCredential.user!.email)
           .set({
         "username": emailController.text.split('@')[0],
-        "bio": "Empty Bio..."
+        "bio": ""
 
         // We can create more fields as we want
       });

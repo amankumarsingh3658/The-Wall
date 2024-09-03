@@ -4,7 +4,11 @@ class MyTextBox extends StatelessWidget {
   void Function()? onPressed;
   String sectionName;
   String text;
-  MyTextBox({super.key, required this.sectionName, required this.text ,required this.onPressed});
+  MyTextBox(
+      {super.key,
+      required this.sectionName,
+      required this.text,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,9 @@ class MyTextBox extends StatelessWidget {
               ],
             ),
             // Text
-            Text(text),
+            text.isEmpty
+                ? Text("Empty Bio...", style: TextStyle(color: Colors.grey))
+                : Text(text),
           ],
         ),
       ),
