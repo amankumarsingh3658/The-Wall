@@ -5,6 +5,7 @@ import 'package:thewall/components/drawer.dart';
 
 import 'package:thewall/components/text_fields.dart';
 import 'package:thewall/components/wall_post.dart';
+import 'package:thewall/helper/date_time_helper.dart';
 import 'package:thewall/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
                 // The wall
@@ -75,21 +76,23 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("User Posts")
-                          .orderBy("TimeStamp",descending: false)
+                          .orderBy("TimeStamp", descending: false)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
-                            reverse: false,
+                              reverse: false,
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
                                 // Get the message
                                 final post = snapshot.data!.docs[index];
                                 return WallPost(
+                                  time: formatDate(post["TimeStamp"]),
                                   message: post["Message"],
                                   userEmail: post["UserEmail"],
                                   postId: post.id,
-                                  likes: List<String>.from(post["Likes"] ?? <String>[]),
+                                  likes: List<String>.from(
+                                      post["Likes"] ?? <String>[]),
                                 );
                               });
                         } else {

@@ -63,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       } else {
                         null;
                       }
-                      Navigator.pop(context); // Popping out with the new value
+                      Navigator.pop(context);
                     },
                     child: Text(
                       "Save",

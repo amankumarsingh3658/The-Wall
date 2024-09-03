@@ -13,7 +13,7 @@ class MyTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.only(left: 10, bottom: 10),
