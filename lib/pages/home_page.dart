@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:thewall/components/drawer.dart';
 
 import 'package:thewall/components/text_fields.dart';
 import 'package:thewall/components/wall_post.dart';
+import 'package:thewall/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,25 +42,27 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  // go to profile Page
+  void goToProfilePage() {
+    // pop the drawer
+    Navigator.pop(context);
+
+    // go to profile page
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProfilePage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           "The Wall",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.grey[900],
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: Icon(
-              Icons.logout,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
       body: SafeArea(
         child: Center(
@@ -127,6 +131,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+      ),
+      drawer: MyDrawer(
+        onProfileTap: () => goToProfilePage(),
+        onLogout: () => signOut(),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thewall/components/button.dart';
@@ -35,9 +36,22 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-          // Pop loading circle if We Register
+      // We are creating the user here
+      // To Get the User Data Later
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+      // After getting the user we need to store the user data in the collection
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(userCredential.user!.email)
+          .set({
+        "username": emailController.text.split('@')[0],
+        "bio": "Empty Bio..."
+
+        // We can create more fields as we want
+      });
+      // Pop loading circle if We Register
       if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       // pop loading cirle
