@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
+                            reverse: true,
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
                                 // Get the message

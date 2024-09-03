@@ -59,9 +59,7 @@ class _WallPostState extends State<WallPost> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 20,
-      ),
+      padding: const EdgeInsets.only(bottom: 10),
       child: Container(
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
