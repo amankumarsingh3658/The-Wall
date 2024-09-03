@@ -127,14 +127,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       text: userData['bio'],
                       onPressed: () => editField('bio'),
                     ),
-                    // Posts Section
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "My Posts",
-                      style: TextStyle(color: Colors.grey[600]),
-                    ),
                   ],
                 ),
               );

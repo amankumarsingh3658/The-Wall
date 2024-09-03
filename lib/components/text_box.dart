@@ -40,7 +40,7 @@ class MyTextBox extends StatelessWidget {
             ),
             // Text
             text.isEmpty
-                ? Text("Empty Bio...", style: TextStyle(color: Colors.grey))
+                ? Text("Have a Great Start to your Bio...", style: TextStyle(color: Colors.grey))
                 : Text(text),
           ],
         ),
