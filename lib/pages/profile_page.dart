@@ -78,8 +78,12 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.grey[900],
-          title: Text("Profile Page"),
+          title: Text(
+            "Profile Page",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         body: StreamBuilder(
           stream: FirebaseFirestore.instance
