@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
         "UserEmail": currentUser!.email,
         "Message": postTextController.text,
         "TimeStamp": DateTime.now(),
+        "Likes": [],
       });
     }
     // Clear the text fields
@@ -82,6 +83,8 @@ class _HomePageState extends State<HomePage> {
                                 return WallPost(
                                   message: post["Message"],
                                   userEmail: post["UserEmail"],
+                                  postId: post.id,
+                                  likes: List<String>.from(post["Likes"] ?? []),
                                 );
                               });
                         } else {
