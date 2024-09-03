@@ -26,14 +26,14 @@ class _HomePageState extends State<HomePage> {
     await FirebaseAuth.instance.signOut();
   }
 
-  void postMessage() async {
+  Future<void> postMessage() async {
     // only post if there is something in the text Field
     if (postTextController.text.isNotEmpty) {
       await FirebaseFirestore.instance.collection("User Posts").add({
         "UserEmail": currentUser!.email,
         "Message": postTextController.text,
         "TimeStamp": DateTime.now(),
-        "Likes": [],
+        "Likes": <String>[],
       });
     }
     // Clear the text fields
@@ -75,12 +75,12 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("User Posts")
-                          .orderBy("TimeStamp", descending: true)
+                          .orderBy("TimeStamp",descending: false)
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
-                            reverse: true,
+                            reverse: false,
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
                                 // Get the message
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                                   message: post["Message"],
                                   userEmail: post["UserEmail"],
                                   postId: post.id,
-                                  likes: List<String>.from(post["Likes"] ?? []),
+                                  likes: List<String>.from(post["Likes"] ?? <String>[]),
                                 );
                               });
                         } else {

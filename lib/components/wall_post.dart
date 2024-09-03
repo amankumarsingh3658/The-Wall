@@ -24,6 +24,7 @@ class WallPost extends StatefulWidget {
 class _WallPostState extends State<WallPost> {
   // Get the user from the firebase
   final currentUser = FirebaseAuth.instance.currentUser;
+  // Initially the post is unliked
   bool isLiked = false;
 
   @override
@@ -59,7 +60,7 @@ class _WallPostState extends State<WallPost> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(top: 10),
       child: Container(
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
