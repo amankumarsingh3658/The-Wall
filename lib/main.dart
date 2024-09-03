@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:thewall/auth/auth.dart';
 import 'package:thewall/firebase_options.dart';
+import 'package:thewall/themes/dark_theme.dart';
+import 'package:thewall/themes/light_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: AuthPage(),
     );

@@ -139,7 +139,8 @@ class _WallPostState extends State<WallPost> {
       child: Container(
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.grey[200]),
+            borderRadius: BorderRadius.circular(20),
+            color: Theme.of(context).colorScheme.primary),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -209,9 +210,14 @@ class _WallPostState extends State<WallPost> {
                             builder: (sontext, snapshot) {
                               if (snapshot.hasData) {
                                 return Text(
-                                    snapshot.data!.docs.length.toString());
+                                  snapshot.data!.docs.length.toString(),
+                                  style: TextStyle(color: Colors.grey[600]),
+                                );
                               } else {
-                                return Text("..");
+                                return Text(
+                                  "..",
+                                  style: TextStyle(color: Colors.grey[600]),
+                                );
                               }
                             })
                       ],

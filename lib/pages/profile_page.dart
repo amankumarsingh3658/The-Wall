@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           backgroundColor: Colors.grey[900],
@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Center(
                       child: Text(
                         currentUser!.email.toString(),
-                        style: TextStyle(color: Colors.grey[700]),
+                        style: TextStyle(color: Colors.grey[600]),
                       ),
                     ),
                     SizedBox(

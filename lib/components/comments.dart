@@ -20,7 +20,7 @@ class Comment extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8), color: Colors.grey[300]),
+            borderRadius: BorderRadius.circular(8), color: Theme.of(context).colorScheme.secondary),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -37,7 +37,7 @@ class Comment extends StatelessWidget {
                 children: [
                   Text(
                     user,
-                    style: TextStyle(color: Colors.grey[600]),
+                    style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
                   ),
                   Text(
                     time,

@@ -17,7 +17,8 @@ class MyTextBox extends StatelessWidget {
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.only(left: 10, bottom: 10),
-        decoration: BoxDecoration(color: Colors.grey[200]),
+        decoration:
+            BoxDecoration(color: Theme.of(context).colorScheme.secondary),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,20 +29,27 @@ class MyTextBox extends StatelessWidget {
               children: [
                 Text(
                   sectionName,
-                  style: TextStyle(color: Colors.grey[500]),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.tertiary),
                 ),
                 IconButton(
                     onPressed: onPressed,
                     icon: Icon(
                       Icons.edit,
-                      color: Colors.grey[400],
+                      color: Theme.of(context).colorScheme.tertiary,
                     ))
               ],
             ),
             // Text
             text.isEmpty
-                ? Text("Have a Great Start to your Bio...", style: TextStyle(color: Colors.grey))
-                : Text(text),
+                ? Text("Have a Great Start to your Bio...",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary))
+                : Text(
+                    text,
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiaryFixed),
+                  ),
           ],
         ),
       ),
