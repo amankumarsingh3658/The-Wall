@@ -16,7 +16,7 @@ class MyTextBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.only(left: 10, bottom: 10),
+        padding: const EdgeInsets.only(left: 10, bottom: 10),
         decoration:
             BoxDecoration(color: Theme.of(context).colorScheme.secondary),
         child: Column(

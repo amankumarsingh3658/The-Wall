@@ -26,17 +26,17 @@ class _ProfilePageState extends State<ProfilePage> {
               backgroundColor: Colors.grey[900],
               title: Text(
                 "Edit $fieldName",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               content: TextField(
                 cursorColor: Colors.white,
                 autofocus: true,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     hintText: "Update $fieldName",
-                    hintStyle: TextStyle(color: Colors.grey)),
+                    hintStyle: const TextStyle(color: Colors.grey)),
                 onChanged: (value) {
                   newValue = value;
                 },
@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    child: const Text(
                       "Cancel",
                       style: TextStyle(color: Colors.white),
                     )),
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 TextButton(
                     onPressed: () {
                       // Edit the New value in firestore
-                      if (newValue.trim().length > 0) {
+                      if (newValue.trim().isNotEmpty) {
                         // Only update if there exist a value to be stored
                         userCollection
                             .doc(currentUser!.email)
@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       }
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    child: const Text(
                       "Save",
                       style: TextStyle(color: Colors.white),
                     ))
@@ -78,9 +78,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: Colors.grey[900],
-          title: Text(
+          title: const Text(
             "Profile Page",
             style: TextStyle(color: Colors.white),
           ),
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
+                    const Center(
                       child: Icon(
                         Icons.person,
                         size: 72,
@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: TextStyle(color: Colors.grey[600]),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Text(
@@ -140,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Text(snapshot.error.toString()),
               );
             }
-            return Center(child: CircularProgressIndicator.adaptive());
+            return const Center(child: CircularProgressIndicator.adaptive());
           },
         ));
   }

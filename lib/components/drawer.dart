@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget {
             // Header
             Column(
               children: [
-                DrawerHeader(
+                const DrawerHeader(
                     child: Icon(
                   Icons.person,
                   color: Colors.white,

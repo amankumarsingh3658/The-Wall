@@ -28,7 +28,7 @@ class Comment extends StatelessWidget {
             children: [
               // Comment
               Text(comment),
-              SizedBox(
+              const SizedBox(
                 height: 2,
               ),
               // User , Time

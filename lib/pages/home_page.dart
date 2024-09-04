@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
 
     // go to profile page
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ProfilePage()));
+        context, MaterialPageRoute(builder: (context) => const ProfilePage()));
   }
 
   @override
@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
           "The Wall",
           style: TextStyle(color: Colors.white),
         ),
@@ -98,10 +98,10 @@ class _HomePageState extends State<HomePage> {
                         } else {
                           if (snapshot.hasError) {
                             return Center(
-                              child: Text("Error" + snapshot.error.toString()),
+                              child: Text("Error${snapshot.error}"),
                             );
                           }
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -120,16 +120,16 @@ class _HomePageState extends State<HomePage> {
                     // Post Button
                     IconButton(
                         onPressed: () => postMessage(),
-                        icon: Icon(Icons.arrow_circle_up))
+                        icon: const Icon(Icons.arrow_circle_up))
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 // Logged in user
                 Text(
                   "Logged in as : ${currentUser!.email}",
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 )
               ],
             ),

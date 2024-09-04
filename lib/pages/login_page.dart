@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:thewall/components/button.dart';
 import 'package:thewall/components/text_fields.dart';
@@ -22,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     // show loading bar
     showDialog(
         context: context,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     // Check is the password is atleast 6 characters
@@ -62,11 +61,11 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Logo
-                Icon(
+                const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 // Welcome Back Message
@@ -76,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.grey[700],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 // Email Text Field
@@ -84,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: emailController,
                     hintText: 'Enter Email',
                     obsecure: false),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 // Password Text Field
@@ -93,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Enter Password',
                     obsecure: true),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 // Sign in button
@@ -101,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   text: 'Sign In',
                   onTap: () => signIn(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 //Go to register page
@@ -114,12 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.grey[700],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         "Register Now",
                         style: TextStyle(
                           color: Colors.blue,

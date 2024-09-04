@@ -12,11 +12,11 @@ class LikeButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: isLiked
-          ? Icon(
+          ? const Icon(
               Icons.favorite,
               color: Colors.red,
             )
-          : Icon(
+          : const Icon(
               Icons.favorite_border_outlined,
               color: Colors.grey,
             ),

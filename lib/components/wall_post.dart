@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:thewall/components/comment_button.dart';
 import 'package:thewall/components/comments.dart';
@@ -87,12 +88,12 @@ class _WallPostState extends State<WallPost> {
         context: context,
         builder: (context) => AlertDialog(
               backgroundColor: Colors.grey[900],
-              title: Text(
+              title: const Text(
                 "Add Comment",
                 style: TextStyle(color: Colors.white),
               ),
               content: TextField(
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 cursorColor: Colors.white,
                 autofocus: true,
                 controller: commentController,
@@ -100,7 +101,7 @@ class _WallPostState extends State<WallPost> {
                   focusColor: Colors.white,
                   hintText: "Add a Comment...",
                   hintStyle: TextStyle(color: Colors.grey[300]),
-                  focusedBorder: UnderlineInputBorder(
+                  focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.white,
                   )),
@@ -113,7 +114,7 @@ class _WallPostState extends State<WallPost> {
                       commentController.clear();
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel")),
+                    child: const Text("Cancel")),
                 // Save Button
                 TextButton(
                   onPressed: () {
@@ -127,7 +128,7 @@ class _WallPostState extends State<WallPost> {
                       Navigator.pop(context);
                     }
                   },
-                  child: Text("Save"),
+                  child: const Text("Save"),
                 )
               ],
             ));
@@ -139,16 +140,16 @@ class _WallPostState extends State<WallPost> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Delete Post"),
-              content: Text("Are You Sure You Want To Delete This Post"),
+              title: const Text("Delete Post"),
+              content: const Text("Are You Sure You Want To Delete This Post"),
               actions: [
                 // Cancel Button
                 TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child:
-                        Text("Cancel", style: TextStyle(color: Colors.grey))),
+                    child: const Text("Cancel",
+                        style: TextStyle(color: Colors.grey))),
 
                 // Delete button
                 TextButton(
@@ -173,13 +174,18 @@ class _WallPostState extends State<WallPost> {
                           .collection("User Posts")
                           .doc(widget.postId)
                           .delete()
-                          .then((value) => print("Deleted"))
-                          .onError((error, stackTrace) {
-                        print(error.toString());
+                          .then((value) {
+                        if (kDebugMode) {
+                          print("Deleted");
+                        }
+                      }).onError((error, stackTrace) {
+                        if (kDebugMode) {
+                          print(error.toString());
+                        }
                       });
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    child: const Text(
                       "Delete",
                       style: TextStyle(color: Colors.grey),
                     ))
@@ -192,7 +198,7 @@ class _WallPostState extends State<WallPost> {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Theme.of(context).colorScheme.primary),
@@ -203,11 +209,11 @@ class _WallPostState extends State<WallPost> {
               children: [
                 // Profile pic
                 Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: Colors.grey[400]),
-                    child: Icon(Icons.person)),
-                SizedBox(width: 15),
+                    child: const Icon(Icons.person)),
+                const SizedBox(width: 15),
                 // Message and User Email
                 Expanded(
                   child: Column(
@@ -219,7 +225,7 @@ class _WallPostState extends State<WallPost> {
                       ),
                       Text(widget.time,
                           style: TextStyle(color: Colors.grey[600])),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(widget.message),
@@ -237,7 +243,7 @@ class _WallPostState extends State<WallPost> {
                             // Liked Icon
                             LikeButton(
                                 isLiked: isLiked, onTap: () => toggleLike()),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             // Liked counter
@@ -247,7 +253,7 @@ class _WallPostState extends State<WallPost> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Column(
@@ -256,7 +262,7 @@ class _WallPostState extends State<WallPost> {
                             CommentButton(
                               onTap: () => showCommentDialog(),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             // Comment counter
@@ -296,10 +302,10 @@ class _WallPostState extends State<WallPost> {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Comments..",
               style: TextStyle(color: Colors.grey),
             ),
@@ -315,7 +321,7 @@ class _WallPostState extends State<WallPost> {
                     return ListView.builder(
                         itemCount: snapshot.data!.docs.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           final comment = snapshot.data!.docs[index];
                           return Comment(
@@ -327,7 +333,7 @@ class _WallPostState extends State<WallPost> {
                   } else if (snapshot.hasError) {
                     return Text(snapshot.error.toString());
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }

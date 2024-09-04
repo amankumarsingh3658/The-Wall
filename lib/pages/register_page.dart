@@ -17,7 +17,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void signUp() async {
     showDialog(
         context: context,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
 
@@ -83,11 +83,11 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Logo
-                Icon(
+                const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 // Welcome Back Message
@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Colors.grey[700],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 // Email Text Field
@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: emailController,
                     hintText: 'Enter Email',
                     obsecure: false),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 // Password Text Field
@@ -115,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obsecure: true,
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
 
@@ -125,13 +125,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintText: 'Confirm Password',
                     obsecure: true),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 // Sign in button
                 MyButton(text: 'Sign Up', onTap: () => signUp()),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 //Go to register page
@@ -144,12 +144,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.grey[700],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     GestureDetector(
                       onTap: widget.onTap,
-                      child: Text(
+                      child: const Text(
                         "Login Now",
                         style: TextStyle(
                           color: Colors.blue,
