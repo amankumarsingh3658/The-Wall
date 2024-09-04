@@ -17,10 +17,11 @@ class MyTextField extends StatelessWidget {
       controller: controller,
       obscureText: obsecure,
       decoration: InputDecoration(
-          enabledBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary)),
-          focusedBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+          enabledBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: Theme.of(context).colorScheme.secondary)),
+          focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white)),
           fillColor: Theme.of(context).colorScheme.primary,
           filled: true,
           hintText: hintText,

@@ -113,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                     // Text Field
                     Expanded(
                       child: MyTextField(
+                        
                           controller: postTextController,
                           hintText: "Write something on the Wall....",
                           obsecure: false),

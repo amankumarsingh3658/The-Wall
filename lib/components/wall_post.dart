@@ -323,12 +323,12 @@ class _WallPostState extends State<WallPost> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
+                          // Get The comments
                           final comment = snapshot.data!.docs[index];
                           return Comment(
                               comment: comment["Comment"],
                               time: formatDate(comment["TimeStamp"]),
                               user: comment["CommentBy"]);
-                          // Get The comments
                         });
                   } else if (snapshot.hasError) {
                     return Text(snapshot.error.toString());
