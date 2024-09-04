@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:thewall/components/comment_button.dart';
 import 'package:thewall/components/comments.dart';
+import 'package:thewall/components/delete_button.dart';
 import 'package:thewall/components/like_button.dart';
 import 'package:thewall/helper/date_time_helper.dart';
 
@@ -132,6 +133,60 @@ class _WallPostState extends State<WallPost> {
             ));
   }
 
+  // Delete Post
+  // confirm to delete
+  void deletePost() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Delete Post"),
+              content: Text("Are You Sure You Want To Delete This Post"),
+              actions: [
+                // Cancel Button
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child:
+                        Text("Cancel", style: TextStyle(color: Colors.grey))),
+
+                // Delete button
+                TextButton(
+                    onPressed: () async {
+                      // First delete the comments
+                      final commentDocs = await FirebaseFirestore.instance
+                          .collection("User Posts")
+                          .doc(widget.postId)
+                          .collection("Comments")
+                          .get();
+
+                      for (var docs in commentDocs.docs) {
+                        await FirebaseFirestore.instance
+                            .collection("User Posts")
+                            .doc(widget.postId)
+                            .collection("Comments")
+                            .doc(docs.id)
+                            .delete();
+                      }
+                      // Then delete the post
+                      await FirebaseFirestore.instance
+                          .collection("User Posts")
+                          .doc(widget.postId)
+                          .delete()
+                          .then((value) => print("Deleted"))
+                          .onError((error, stackTrace) {
+                        print(error.toString());
+                      });
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Delete",
+                      style: TextStyle(color: Colors.grey),
+                    ))
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -171,57 +226,72 @@ class _WallPostState extends State<WallPost> {
                     ],
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Column(
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Liked Icon
-                        LikeButton(isLiked: isLiked, onTap: () => toggleLike()),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        // Liked counter
-                        Text(
-                          widget.likes.length.toString(),
-                          style: TextStyle(color: Colors.grey[600]),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        // Comment Icon
-                        CommentButton(
-                          onTap: () => showCommentDialog(),
+                        Column(
+                          children: [
+                            // Liked Icon
+                            LikeButton(
+                                isLiked: isLiked, onTap: () => toggleLike()),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            // Liked counter
+                            Text(
+                              widget.likes.length.toString(),
+                              style: TextStyle(color: Colors.grey[600]),
+                            )
+                          ],
                         ),
                         SizedBox(
-                          height: 10,
+                          width: 20,
                         ),
-                        // Comment counter
-                        StreamBuilder(
-                            stream: FirebaseFirestore.instance
-                                .collection("User Posts")
-                                .doc(widget.postId)
-                                .collection("Comments")
-                                .snapshots(),
-                            builder: (sontext, snapshot) {
-                              if (snapshot.hasData) {
-                                return Text(
-                                  snapshot.data!.docs.length.toString(),
-                                  style: TextStyle(color: Colors.grey[600]),
-                                );
-                              } else {
-                                return Text(
-                                  "..",
-                                  style: TextStyle(color: Colors.grey[600]),
-                                );
-                              }
-                            })
+                        Column(
+                          children: [
+                            // Comment Icon
+                            CommentButton(
+                              onTap: () => showCommentDialog(),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            // Comment counter
+                            StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection("User Posts")
+                                    .doc(widget.postId)
+                                    .collection("Comments")
+                                    .snapshots(),
+                                builder: (sontext, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!.docs.length.toString(),
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    );
+                                  } else {
+                                    return Text(
+                                      "..",
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    );
+                                  }
+                                }),
+                          ],
+                        ),
                       ],
                     ),
+                    // Delete Button
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Visibility(
+                          visible: widget.userEmail == currentUser!.email
+                              ? true
+                              : false,
+                          child: DeleteButton(onTap: () => deletePost())),
+                    )
                   ],
                 )
               ],
@@ -261,7 +331,7 @@ class _WallPostState extends State<WallPost> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                })
+                }),
           ],
         ),
       ),
