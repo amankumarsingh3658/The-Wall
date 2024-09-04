@@ -1,4 +1,4 @@
-Social Media App - Flutter & Firebase
+Social Media App - Flutter, Firebase(Cloud Firestore)
 
 Project Description:
 
